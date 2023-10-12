@@ -1,0 +1,66 @@
+
+<app-barcode-scanner
+ [isActive] = "isActive"
+ [runtimeSettings] = "runtimeSettings"
+ [torchOn] = "torchOn"
+ [zoomFactor] = "zoomFactor"
+ dceLicense = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ=="
+ dbrLicense = "DLS2eyJoYW5kc2hha2VDb2RlIjoiMjAwMDAxLTE2NDk4Mjk3OTI2MzUiLCJvcmdhbml6YXRpb25JRCI6IjIwMDAwMSIsInNlc3Npb25QYXNzd29yZCI6IndTcGR6Vm05WDJrcEQ5YUoifQ=="
+ (onFrameRead)="onFrameRead($event)"></app-barcode-scanner>
+
+<div>
+  <svg
+    class="viewfinder"
+    preserveAspectRatio="xMidYMid slice"
+    [attr.viewBox]="viewBox">
+    <defs>
+      <mask id="myMask">
+        <rect 
+          x="0" 
+          y="0" 
+          [attr.width]="width" 
+          [attr.height]="height" fill="white" />
+        <rect 
+          [attr.x]="left"
+          [attr.y]="top"
+          [attr.width]="right - left"
+          [attr.height]="bottom - top" fill="black" 
+        />
+      </mask>
+    </defs>
+    
+    <line 
+      [attr.x1]="left"
+      [attr.y1]="top"
+      [attr.x2]="right"
+      [attr.y2]="top"
+      class="scan-line">
+      <animate attributeName="y1" [attr.to]="bottom"  begin="0s" dur="2s"  repeatCount="indefinite" />
+      <animate attributeName="y2" [attr.to]="bottom"  begin="0s" dur="2s"  repeatCount="indefinite" />
+    </line>
+    <rect [attr.width]="width" [attr.height]="height" class="mask-rect" mask="url(#myMask)">
+    </rect>
+    <rect [attr.x]="left" [attr.y]="top" [attr.width]="right - left" [attr.height]="bottom - top" class="scan-rect"/>
+  </svg>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="zoomOut()">
+        <ion-icon name="remove"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="zoomIn()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="toggleTorch()">
+        <ion-icon name="flashlight-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="close()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</div>
+
+

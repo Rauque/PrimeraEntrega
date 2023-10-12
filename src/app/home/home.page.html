@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <div style="color: black;">
+    <h1>Bienvenido</h1>
+  </div>
+  <ion-button expand="full" (click)="navigate()">Leer Qr</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let entry of scanOptions">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    </ion-item>
+    <ion-item *ngFor="let result of barcodeResults">
+      <ion-label>{{result.barcodeFormat + ": " + result.barcodeText}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
